@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('photo');
             $table->string('url');
             $table->enum('status', ['pending', 'process', 'done'])->default('pending');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

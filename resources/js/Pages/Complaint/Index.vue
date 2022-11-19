@@ -16,19 +16,12 @@ export default {
     },
     props: {
         complaints: Object,
-        status: Array,
     },
     setup() {
         const destroy = (id) => {
             if (confirm('Hapus pengaduan ini')) {
                 Inertia.delete(route('complaints.destroy', id))
             }
-        }
-
-        const updateStatus = (id, val) => {
-            Inertia.put(route('complaints.updateStatus', id), {
-                status: val
-            });
         }
 
         const diffForHumans = (date) => {
@@ -48,7 +41,7 @@ export default {
         }
 
         return {
-            destroy, updateStatus, diffForHumans, formatDate
+            destroy, diffForHumans, formatDate
         }
     },
     data() {
@@ -128,6 +121,9 @@ export default {
                                         Deskripsi
                                     </th>
                                     <th scope="col" class="py-3 px-6">
+                                        Keterangan
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
                                         Status
                                     </th>
                                     <th scope="col" class="py-3 px-6" v-if="$page.props.auth.user.role === 'admin'">
@@ -159,6 +155,9 @@ export default {
                                         {{ complaint.description }}
                                     </td>
                                     <td class="py-4 px-6">
+                                        {{ complaint.keterangan }}
+                                    </td>
+                                    <td class="py-4 px-6">
                                         <span class="p-1 rounded uppercase leading-loose text-xs font-semibold"
                                               :class="{
                                             'bg-blue-100 text-blue-700' : complaint.status === 'process',
@@ -170,11 +169,6 @@ export default {
                                     </td>
                                     <td v-if="$page.props.auth.user.role === 'admin'" class="py-4 px-6">
                                         <div class="flex items-center space-x-4">
-                                            <select v-model="complaint.status"
-                                                    @change="updateStatus(complaint.id, complaint.status)"
-                                                    class="rounded border-gray-300 focus:ring focus:ring-rose-300 focus:border-rose-300">
-                                                <option v-for="s in status" :value="s">{{ s }}</option>
-                                            </select>
                                             <Link :href="route('complaints.show', complaint.id)"
                                                   class="rounded p-1 hover:bg-rose-50 hover:text-rose-600 focus:outline-none focus:bg-rose-50 focus:border-rose-300 focus:text-rose-600">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

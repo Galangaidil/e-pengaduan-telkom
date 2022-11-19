@@ -1,12 +1,17 @@
-<script setup xmlns="http://www.w3.org/1999/html">
+<script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head, Link} from '@inertiajs/inertia-vue3';
+import {Head, Link, useForm} from '@inertiajs/inertia-vue3';
 import dayjs from "dayjs";
 import {Inertia} from "@inertiajs/inertia";
+import TextInput from '@/Components/TextInput.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/InputError.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
-defineProps({
+const props = defineProps({
     complaint: Object,
-    username: String
+    username: String,
+    status: Array
 })
 
 const formatDate = (date) => {
@@ -26,6 +31,11 @@ const destroy = (id) => {
 const print = () => {
     confirm('print halaman ini');
 }
+
+const form = useForm({
+    'keterangan': props.complaint.keterangan,
+    'status' : props.complaint.status
+});
 
 </script>
 
@@ -93,6 +103,26 @@ const print = () => {
                                         </svg>
                                         <span>Hapus</span>
                                     </button>
+
+                                    <form @submit.prevent="form.put(route('complaints.updateStatus', props.complaint.id))">
+                                        <div>
+                                            <InputLabel for="keterangan" value="Keterangan" />
+                                            <TextInput type="text" id="keterangan" class="mt-1 block w-full" v-model="form.keterangan" placeholder="Masukkan keterangan..." />
+                                            <InputError v-if="form.errors.keterangan" :message="form.errors.keterangan" class="mt-2" />
+                                        </div>
+                                        <div class="mt-4">
+                                            <InputLabel for="status" value="Status" />
+                                            <select v-model="form.status"
+                                                    class="rounded block mt-1 w-full border-gray-300 focus:ring focus:ring-rose-300 focus:border-rose-300">
+                                                <option v-for="s in status" :value="s">{{ s }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="mt-4 flex justify-end">
+                                            <PrimaryButton>
+                                                Kirim
+                                            </PrimaryButton>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

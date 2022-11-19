@@ -15,7 +15,8 @@ class Complaint extends Model
         'description',
         'photo',
         'url',
-        'status'
+        'status',
+        'keterangan'
     ];
 
     public function user()

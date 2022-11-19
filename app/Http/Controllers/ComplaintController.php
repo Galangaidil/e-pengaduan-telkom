@@ -40,14 +40,12 @@ class ComplaintController extends Controller
                 'created_at' => $complaint->created_at,
                 'updated_at' => $complaint->updated_at,
                 'name' => $complaint->name,
+                'keterangan' => $complaint->keterangan,
             ];
         });
 
-        $status = ['pending', 'process', 'done'];
-
         return Inertia::render('Complaint/Index', [
             'complaints' => $collection,
-            'status' => $status,
         ]);
     }
 
@@ -98,10 +96,12 @@ class ComplaintController extends Controller
     public function show(Complaint $complaint)
     {
         $username = $complaint->user->name;
+        $status = ['pending', 'process', 'done'];
 
         return Inertia::render('Complaint/Show', [
             'complaint' => $complaint,
-            'username' => $username
+            'username' => $username,
+            'status' => $status
         ]);
     }
 
@@ -159,10 +159,11 @@ class ComplaintController extends Controller
         $this->authorize('update', $complaint);
 
         $request->validate([
-            'status' => 'required'
+            'status' => 'required',
+            'keterangan' => 'required|string|max:255'
         ]);
 
-        $complaint->update($request->only('status'));
+        $complaint->update($request->only(['status', 'keterangan']));
 
         return to_route('complaints.index')->with('message', 'Pengaduan berhasil diupdate');
     }
