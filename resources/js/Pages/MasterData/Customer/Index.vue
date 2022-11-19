@@ -99,7 +99,7 @@ export default {
 
                         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                             <table class="w-full text-sm text-left text-gray-500">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <thead class="text-xs text-gray-700 uppercase bg-rose-100">
                                 <tr>
                                     <th scope="col" class="py-3 px-6">
                                         Username
