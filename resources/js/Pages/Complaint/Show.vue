@@ -29,7 +29,11 @@ const destroy = (id) => {
 }
 
 const print = () => {
-    confirm('print halaman ini');
+    const w = window.open();
+    const content = document.getElementById('printableArea').outerHTML;
+    w.document.write(content);
+    w.print();
+    w.close();
 }
 
 const form = useForm({
@@ -54,7 +58,7 @@ const form = useForm({
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="flex lg:space-x-5 flex-col lg:flex-row">
-                            <div class="w-full lg:w-2/3">
+                            <div class="w-full lg:w-2/3" id="printableArea">
                                 <article class="prose prose-img:rounded-xl">
                                     <h2 class="capitalize">{{complaint.title }}</h2>
 
@@ -66,6 +70,14 @@ const form = useForm({
 
                                     <p>
                                         {{ complaint.description }}
+                                    </p>
+
+                                    <p>
+                                        Status: {{ complaint.status }}.
+                                    </p>
+
+                                    <p>
+                                        Keterangan: {{ complaint.keterangan }}
                                     </p>
                                 </article>
                             </div>
