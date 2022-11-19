@@ -1,8 +1,14 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Inertia } from '@inertiajs/inertia';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['auth'])
+
+function createComplaint()
+{
+    return Inertia.get(route('complaints.create'));
+}
 </script>
 
 <template>
@@ -36,8 +42,8 @@ const props = defineProps(['auth'])
                             </p>
                         </div>
 
-                        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-                            <div>
+                        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
+                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div
                                     class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">
@@ -47,7 +53,7 @@ const props = defineProps(['auth'])
                                 <h3 class="mb-2 text-xl font-bold">Lemot</h3>
                                 <p class="text-gray-500 dark:text-gray-400">Pas di tes kecepatan internetnya cuma 20 Kbps, Ga bisa main sosmed 🥲.</p>
                             </div>
-                            <div>
+                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">
                                         <path fill-rule="evenodd" d="M2.22 2.22a.75.75 0 011.06 0l14.5 14.5a.75.75 0 11-1.06 1.06L2.22 3.28a.75.75 0 010-1.06z" clip-rule="evenodd" />
@@ -57,7 +63,7 @@ const props = defineProps(['auth'])
                                 <h3 class="mb-2 text-xl font-bold">Router Ga Hidup</h3>
                                 <p class="text-gray-500 dark:text-gray-400">Udah di colokin, cuma ga ada tanda-tanda kehidupan 🥺.</p>
                             </div>
-                            <div>
+                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div
                                     class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">
@@ -67,6 +73,16 @@ const props = defineProps(['auth'])
                                 </div>
                                 <h3 class="mb-2 text-xl font-bold">Ga bisa konek</h3>
                                 <p class="text-gray-500 dark:text-gray-400">Padahal passwordnya dah bener, tapi ga bisa nyambung ke wifi 🤯.</p>
+                            </div>
+                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
+                                <div
+                                    class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                        <path d="M10 3.75a2 2 0 10-4 0 2 2 0 004 0zM17.25 4.5a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM5 3.75a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 01.75.75zM4.25 17a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM17.25 17a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM9 10a.75.75 0 01-.75.75h-5.5a.75.75 0 010-1.5h5.5A.75.75 0 019 10zM17.25 10.75a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM14 10a2 2 0 10-4 0 2 2 0 004 0zM10 16.25a2 2 0 10-4 0 2 2 0 004 0z" />
+                                    </svg>
+                                </div>
+                                <h3 class="mb-2 text-xl font-bold">Dan lain-lain</h3>
+                                <p class="text-gray-500 dark:text-gray-400">Tinggal jelasin apa masalah kamu 😉.</p>
                             </div>
                         </div>
 
