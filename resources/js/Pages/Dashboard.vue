@@ -3,11 +3,21 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-const props = defineProps(['auth'])
+const props = defineProps(['auth', 'countTotalComplaint'])
 
 function createComplaint()
 {
     return Inertia.get(route('complaints.create'));
+}
+
+function showComplaint()
+{
+    return Inertia.get(route('complaints.index'));
+}
+
+function showCustomer()
+{
+    return Inertia.get(route('customers.index'));
 }
 </script>
 
@@ -40,9 +50,12 @@ function createComplaint()
                                 </Link>.
                                 Atau kamu juga bisa memilih dari salah satu menu cepat di bawah ini.
                             </p>
+                            <p v-if="props.auth.user.role === 'manager' || props.auth.user.role === 'admin'" class="text-gray-500 sm:text-xl dark:text-gray-400">
+                                Bulan ini ada <strong>{{ props.countTotalComplaint }}</strong> pengaduan.
+                            </p>
                         </div>
 
-                        <div v-if="$page.props.auth.user.role === 'customer'" class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
+                        <div v-if="props.auth.user.role === 'customer'" class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
                             <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div
                                     class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
@@ -83,6 +96,43 @@ function createComplaint()
                                 </div>
                                 <h3 class="mb-2 text-xl font-bold">Dan lain-lain</h3>
                                 <p class="text-gray-500 dark:text-gray-400">Tinggal jelasin apa masalah kamu 😉.</p>
+                            </div>
+                        </div>
+
+                        <div v-if="props.auth.user.role === 'manager' || props.auth.user.role === 'admin'" class="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0">
+                            <div @click="showComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
+                                <div
+                                    class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">
+                                        <path d="M2.22 2.22a.75.75 0 011.06 0l6.783 6.782a1 1 0 01.935.935l6.782 6.783a.75.75 0 11-1.06 1.06l-6.783-6.782a1 1 0 01-.935-.935L2.22 3.28a.75.75 0 010-1.06zM3.636 16.364a9.004 9.004 0 01-1.39-10.936L3.349 6.53a7.503 7.503 0 001.348 8.773.75.75 0 01-1.061 1.061zM6.464 13.536a5 5 0 01-1.213-5.103l1.262 1.262a3.493 3.493 0 001.012 2.78.75.75 0 01-1.06 1.06zM16.364 3.636a9.004 9.004 0 011.39 10.937l-1.103-1.104a7.503 7.503 0 00-1.348-8.772.75.75 0 111.061-1.061zM13.536 6.464a5 5 0 011.213 5.103l-1.262-1.262a3.493 3.493 0 00-1.012-2.78.75.75 0 011.06-1.06z" />
+                                    </svg>
+                                </div>
+                                <h3 class="mb-2 text-xl font-bold">
+                                    <span v-if="props.auth.user.role === 'manager'">Lihat</span>
+                                    <span v-if="props.auth.user.role === 'admin'">Kelola</span>
+                                    Pengaduan
+                                </h3>
+                                <p class="text-gray-500 dark:text-gray-400">
+                                    Klik untuk <span v-if="props.auth.user.role === 'manager'">Lihat</span>
+                                    <span v-if="props.auth.user.role === 'admin'">Kelola</span> pengaduan
+                                </p>
+                            </div>
+                            <div @click="showCustomer" class="cursor-pointer rounded p-3 hover:bg-rose-50">
+                                <div
+                                    class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                                    </svg>
+                                </div>
+                                <h3 class="mb-2 text-xl font-bold">
+                                    <span v-if="props.auth.user.role === 'manager'">Lihat</span>
+                                    <span v-if="props.auth.user.role === 'admin'">Kelola</span>
+                                    Pelanggan
+                                </h3>
+                                <p class="text-gray-500 dark:text-gray-400">
+                                    Klik untuk <span v-if="props.auth.user.role === 'manager'">Lihat</span>
+                                    <span v-if="props.auth.user.role === 'admin'">Kelola</span> pelanggan
+                                </p>
                             </div>
                         </div>
 

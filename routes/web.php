@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,14 +21,14 @@ Route::get('/', function() {
     return Inertia::render('Home');
 });
 
-Route::middleware('auth')->group(function (){
+Route::middleware(['auth', 'verified'])->group(function (){
     Route::resource('customers', \App\Http\Controllers\CustomerController::class);
 
     Route::resource('complaints', \App\Http\Controllers\ComplaintController::class);
     Route::put('complaints/{complaint}/updateStatus/', [\App\Http\Controllers\ComplaintController::class, 'updateStatus'])->name('complaints.updateStatus');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::get('/laravel', function () {
@@ -38,9 +39,5 @@ Route::get('/laravel', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

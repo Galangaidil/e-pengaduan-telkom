@@ -66,7 +66,7 @@ export default {
                                 <TextInput type="text" class="mt-1 pl-10 block w-full placeholder-gray-400 placeholder:text-xs" v-model="search" placeholder="Cari pelanggan..." />
                             </div>
 
-                            <Link :href="route('customers.create')"
+                            <Link :href="route('customers.create')" v-if="$page.props.auth.user.role === 'admin'"
                                   class="px-4 py-2 bg-rose-500 text-white rounded-lg text-sm font-semibold leading-tight hover:bg-rose-600">
                                 Buat pelanggan
                             </Link>
@@ -85,7 +85,7 @@ export default {
                                     <th scope="col" class="py-3 px-6">
                                         Address
                                     </th>
-                                    <th scope="col" class="py-3 px-6">
+                                    <th scope="col" class="py-3 px-6" v-if="$page.props.auth.user.role === 'admin'">
                                         Action
                                     </th>
                                 </tr>
@@ -104,7 +104,7 @@ export default {
                                     <td class="py-4 px-6">
                                         {{ customer.address ? customer.address : 'belum didefinisikan'}}
                                     </td>
-                                    <td class="flex items-center py-4 px-6 space-x-3">
+                                    <td class="flex items-center py-4 px-6 space-x-3" v-if="$page.props.auth.user.role === 'admin'">
                                         <Link :href="route('customers.edit', customer.id)" class="font-medium text-blue-600 hover:underline">Edit</Link>
                                         <button @click="destroy(customer.id)" class="font-medium text-red-600 hover:underline">Remove</button>
                                     </td>
