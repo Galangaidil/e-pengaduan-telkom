@@ -4,8 +4,14 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Inertia } from "@inertiajs/inertia";
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
-function redirectToLoginPage() {
+function redirectToLoginPage()
+{
     return Inertia.get(route('login'));
+}
+
+function redirectToRegisterPage()
+{
+    return Inertia.get(route('register'));
 }
 </script>
 
@@ -41,9 +47,9 @@ function redirectToLoginPage() {
                     Apakah Anda mempunyai gangguan dan keluhan pada layanan kami? Jangan khawatir, lakukan pengaduan layanan! Tim kami siap membantu anda.
                 </p>
 
-                <Link @click="redirectToLoginPage"
+                <Link @click="redirectToRegisterPage"
                     class="text-center bg-rose-500 px-8 py-3 rounded-lg text-white uppercase font-semibold">
-                    Masuk
+                   Daftar
                 </Link>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
@@ -52,19 +58,4 @@ function redirectToLoginPage() {
             </div>
         </div>
     </section>
-
-    <!-- <div class="min-h-screen flex justify-center items-center p-6 flex-col">
-        <h1 class="text-center text-4xl text-gray-900 font-semibold -mt-20">Bantuan Telkom</h1>
-
-        <p class="text-center mt-6 text-gray-500">
-            Anda mempunyai gangguan dan keluhan? Lakukan pengaduan layanan! Tim kami siap membantu anda.
-        </p>
-
-        <div class="mt-10 max-w-sm block w-full">
-            <Link @click="redirectToLoginPage"
-                class="w-full block text-center bg-rose-500 px-4 py-2.5 rounded-lg text-white uppercase font-semibold">
-            Pengaduan layanan
-            </Link>
-        </div>
-    </div> -->
 </template>
