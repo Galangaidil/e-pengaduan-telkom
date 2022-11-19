@@ -30,7 +30,7 @@ function createComplaint()
                             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">
                                 Selamat datang {{ props.auth.user.name }}
                             </h2>
-                            <p class="text-gray-500 sm:text-xl dark:text-gray-400">
+                            <p v-if="$page.props.auth.user.role === 'customer'" class="text-gray-500 sm:text-xl dark:text-gray-400">
                                 Ada masalah apa hari ini? Yuk adukan masalah kamu melalui link
                                 <Link :href="route('complaints.create')" class="inline-flex space-x-1 font-medium text-rose-600 hover:underline">
                                     Buat pengaduan
@@ -42,7 +42,7 @@ function createComplaint()
                             </p>
                         </div>
 
-                        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
+                        <div v-if="$page.props.auth.user.role === 'customer'" class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
                             <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div
                                     class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
