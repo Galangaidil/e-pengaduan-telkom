@@ -80,7 +80,7 @@ export default {
                             </div>
 
                             <div class="flex gap-2">
-                                <PrimaryButton @click="create">
+                                <PrimaryButton @click="create" v-if="$page.props.auth.user.role === 'admin'">
                                     Buat pelanggan
                                 </PrimaryButton>
 

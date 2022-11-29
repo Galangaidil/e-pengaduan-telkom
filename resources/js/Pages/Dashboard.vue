@@ -5,9 +5,9 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['auth', 'countTotalComplaint'])
 
-function createComplaint()
+function createComplaint(title)
 {
-    return Inertia.get(route('complaints.create'));
+    return Inertia.get('/complaints/create?title=' + title);
 }
 
 function showComplaint()
@@ -56,7 +56,7 @@ function showCustomer()
                         </div>
 
                         <div v-if="props.auth.user.role === 'customer'" class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
-                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
+                            <div @click="createComplaint('Lemot')" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div
                                     class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">
@@ -66,7 +66,7 @@ function showCustomer()
                                 <h3 class="mb-2 text-xl font-bold">Lemot</h3>
                                 <p class="text-gray-500 dark:text-gray-400">Pas di tes kecepatan internetnya cuma 20 Kbps, Ga bisa main sosmed 🥲.</p>
                             </div>
-                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
+                            <div @click="createComplaint('Router Ga Hidup')" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">
                                         <path fill-rule="evenodd" d="M2.22 2.22a.75.75 0 011.06 0l14.5 14.5a.75.75 0 11-1.06 1.06L2.22 3.28a.75.75 0 010-1.06z" clip-rule="evenodd" />
@@ -76,7 +76,7 @@ function showCustomer()
                                 <h3 class="mb-2 text-xl font-bold">Router Ga Hidup</h3>
                                 <p class="text-gray-500 dark:text-gray-400">Udah di colokin, cuma ga ada tanda-tanda kehidupan 🥺.</p>
                             </div>
-                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
+                            <div @click="createComplaint('Ga bisa konek')" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div
                                     class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">
@@ -87,7 +87,7 @@ function showCustomer()
                                 <h3 class="mb-2 text-xl font-bold">Ga bisa konek</h3>
                                 <p class="text-gray-500 dark:text-gray-400">Padahal passwordnya dah bener, tapi ga bisa nyambung ke wifi 🤯.</p>
                             </div>
-                            <div @click="createComplaint" class="cursor-pointer rounded p-3 hover:bg-rose-50">
+                            <div @click="createComplaint('Dan lain-lain')" class="cursor-pointer rounded p-3 hover:bg-rose-50">
                                 <div
                                     class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-rose-100 lg:h-12 lg:w-12">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-rose-500 lg:w-6 lg:h-6">

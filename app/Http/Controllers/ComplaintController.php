@@ -54,8 +54,13 @@ class ComplaintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->has('title')) {
+            return Inertia::render('Complaint/Create', [
+                'title' => $request->title
+            ]);
+        }
         return Inertia::render('Complaint/Create');
     }
 

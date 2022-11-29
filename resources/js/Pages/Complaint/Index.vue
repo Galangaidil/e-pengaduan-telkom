@@ -109,11 +109,11 @@ export default {
                             </div>
 
 
-                            <div class="flex gap-2" v-if="$page.props.auth.user.role === 'admin' || $page.props.auth.user.role === 'manager'">
-                                <PrimaryButton @click="create" v-if="$page.props.auth.user.role === 'admin'">
+                            <div class="flex gap-2">
+                                <PrimaryButton @click="create" v-if="$page.props.auth.user.role === 'customer'">
                                     Buat pengaduan
                                 </PrimaryButton>
-                                <button @click="printAll"
+                                <button @click="printAll" v-if="$page.props.auth.user.role === 'admin' || $page.props.auth.user.role === 'manager'"
                                     class="px-4 py-2 bg-blue-600 text-white rounded-md text-base font-semibold flex space-x-2 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                         class="w-5 h-5">

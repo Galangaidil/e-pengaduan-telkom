@@ -14,12 +14,13 @@ export default {
         InputError, InputLabel, PrimaryButton, TextInput, TextareaInput, FileInput
     },
     props: {
-      errors: Object
+      errors: Object,
+      title: String
     },
-    setup(){
+    setup(props){
         const form = useForm({
             user_id: usePage().props.value.auth.user.id,
-            title: '',
+            title: props.title,
             description: '',
             photo: null
         });
