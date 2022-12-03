@@ -28,6 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::put('complaints/{complaint}/updateStatus/', [\App\Http\Controllers\ComplaintController::class, 'updateStatus'])->name('complaints.updateStatus');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 

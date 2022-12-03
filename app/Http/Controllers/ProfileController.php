@@ -16,4 +16,16 @@ class ProfileController extends Controller
             'user' => $user
         ]);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $validated = $request->validate([
+            'address' => 'required',
+            'phone_number' => 'required'
+        ]);
+
+        $request->user()->update($validated);
+
+        return back()->with('message', 'profil berhasil diperbarui.');
+    }
 }

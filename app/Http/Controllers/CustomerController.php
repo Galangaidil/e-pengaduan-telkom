@@ -53,7 +53,11 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-       dd(User::find($id));
+        $user = User::find($id);
+
+       return Inertia::render('MasterData/Customer/Show', [
+           'user' => $user
+       ]);
     }
 
     public function edit($id)
